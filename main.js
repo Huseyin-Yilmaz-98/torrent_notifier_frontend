@@ -12,7 +12,8 @@ app.get('/', function (req, res) {
 
 https.createServer({
     key: fs.readFileSync('private.key'),
-    cert: fs.readFileSync('certificate.crt')
+    cert: fs.readFileSync('certificate.crt'),
+    ca: fs.readFileSync('ca_bundle.crt')
 }, app)
     .listen(80, function () {
         console.log('app working on port 80')
