@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -19,13 +20,8 @@ https.createServer({
         console.log('app working on port 443')
     })
 
-const http = require('https');
 
-
-http.get('*', function (req, res) {
-    res.redirect('https://' + req.headers.host + req.url);
-})
-
-http.listen(8080, () => {
-    console.log("also 8080")
-});
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80,()=>console.log("also 80"));
