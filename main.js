@@ -15,6 +15,6 @@ https.createServer({
     cert: fs.readFileSync('certificate.crt'),
     ca: fs.readFileSync('ca_bundle.crt')
 }, app)
-    .listen(80, function () {
-        console.log('app working on port 80')
+    .listen(443, function () {
+        console.log('app working on port 443')
     })
