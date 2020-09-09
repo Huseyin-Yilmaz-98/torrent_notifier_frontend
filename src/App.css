@@ -27,7 +27,7 @@
   justify-content: center;
   flex-direction: column;
   color: #195496;
-  opacity: 90%;
+  opacity: 0.9;
   padding-bottom: 5%;
   border-radius: 16px;
   text-align: center;
@@ -65,14 +65,14 @@
   margin-top:25px;
   line-height: 30px;
   background-color: #195496;
-  opacity: 80%;
+  opacity: 0.8;
   color:white;
   border-radius: 8px;
   border: 1px solid #195496;
 }
 
 .form-submit:hover{
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 .form-direct{
@@ -98,10 +98,7 @@ input:focus{
   outline: none;
 }
 
-input:disabled{
+input:disabled, input:disabled:hover{
   background-color: gray;
-  opacity: 100%;
-}
-input:disabled:hover{
-  opacity: 100%;
+  opacity: 1;
 }

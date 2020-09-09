@@ -24,3 +24,7 @@ yarn-error.log*
 
 # info file
 /src/info.json
+
+#certificate
+server.cert
+server.key

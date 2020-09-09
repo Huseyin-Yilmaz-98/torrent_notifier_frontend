@@ -8,10 +8,11 @@ import {
 } from "react-router-dom";
 import ResetPassword from './Routes/ResetPassword';
 import Home from './Routes/Home';
+import info from "./info.json";
 
 class App extends React.Component {
   render() {
-    const server_address = "http://192.168.1.88:3333/";
+    const server_address = info.server_address;
     return (
       <Router>
         <div>
