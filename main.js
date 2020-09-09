@@ -19,13 +19,13 @@ https.createServer({
         console.log('app working on port 443')
     })
 
-const http = express.createServer();
+const http = require('https');
 
 
 http.get('*', function (req, res) {
     res.redirect('https://' + req.headers.host + req.url);
 })
 
-http.listen(8080,()=>{
+http.listen(8080, () => {
     console.log("also 8080")
 });
