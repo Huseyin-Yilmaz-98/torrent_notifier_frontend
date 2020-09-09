@@ -10,10 +10,12 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-https.createServer({
+/*https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.cert')
 }, app)
     .listen(80, function () {
         console.log('app working on port 80')
-    })
+    })*/
+
+    app.listen(80);
