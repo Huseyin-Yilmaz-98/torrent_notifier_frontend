@@ -8,13 +8,15 @@ const http = require("http");
 app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-    if(!req.headers["host"].includes("www")){
+    if (!req.headers["host"].includes("www")) {
         res.writeHead(301, {
             Location: "https://wwww." + req.headers["host"] + req.url,
         });
         res.end();
     }
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    else {
+        res.sendFile(path.join(__dirname, "build", "index.html"));
+    }
 });
 
 https
