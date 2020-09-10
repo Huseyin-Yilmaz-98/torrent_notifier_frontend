@@ -5,14 +5,7 @@ const fs = require("fs");
 const https = require("https");
 const http = require("http");
 
-app.all(/.*/, (req, res, next) => {
-    const host = req.headers["host"];
-    if (host.match(/^www\..*/i)) {
-        next();
-    } else {
-        res.redirect(301, "https://www." + host + req.url);
-    }
-});
+
 
 app.use(express.static(path.join(__dirname, "build")));
 
