@@ -5,18 +5,19 @@ const fs = require("fs");
 const https = require("https");
 const http = require("http");
 
+app.all(/.*/, (req, res, next) => {
+    const host = req.headers["host"];
+    if (host.match(/^www\..*/i)) {
+        next();
+    } else {
+        res.redirect(301, "https://www." + host + req.url);
+    }
+});
+
 app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-    if (!req.headers["host"].startsWith("www")) {
-        res.writeHead(301, {
-            Location: "https://wwww." + req.headers["host"] + req.url,
-        });
-        res.end();
-    }
-    else {
-        res.status(200).sendFile(path.join(__dirname, "build", "index.html"));
-    }
+    res.status(200).sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 https
