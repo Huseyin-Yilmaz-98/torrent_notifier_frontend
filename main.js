@@ -8,7 +8,12 @@ const http = require("http");
 app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-    console.log(req.headers["host"]);
+    if(!req.headers["host"].includes("www")){
+        res.writeHead(301, {
+            Location: "https://wwww." + req.headers["host"] + req.url,
+        });
+        res.end();
+    }
     res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
