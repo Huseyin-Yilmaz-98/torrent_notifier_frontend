@@ -19,7 +19,8 @@ class Home extends React.Component {
             language: props.cookies.get("language") || this.getLanguage() || "en", //if a language is not defined in the browser cookies before, get it from the function
             showHowToUse: false,
             showRequestList: false,
-            requestList: []
+            requestList: [],
+            isInitialComplete: false
         }
     }
 
@@ -34,9 +35,11 @@ class Home extends React.Component {
         fetch_get(this.props.serverAddress + "check_status")
             .then(res => res.json())
             .then(data => {
-                this.setState({ signedIn: data.signedIn, user: data.user, isChecking: false })
+                this.setState({ signedIn: data.signedIn, user: data.user, isChecking: false, isInitialComplete: true })
             })
-            .catch(() => this.changeIsChecking(false))
+            .finally(() => {
+                this.setState({ isChecking: false, isInitialComplete: true })
+            })
     }
 
     //if the language is turkish, change it to english, and vice versa
@@ -134,14 +137,26 @@ class Home extends React.Component {
         }
     }
 
+    getMainFrame = () => {
+        if(this.state.isInitialComplete){
+            if(this.state.signedIn){
+                return <LoggedIn serverAddress={this.props.serverAddress} signUserOut={this.signUserOut} user={this.state.user} changeIsChecking={this.changeIsChecking} language={this.state.language} />
+            }
+            else{
+                return <LoggedOut serverAddress={this.props.serverAddress} signUserIn={this.signUserIn} changeIsChecking={this.changeIsChecking} language={this.state.language} />
+            }
+        }
+        else{
+            return null;
+        }
+    }
     render() {
         return (
             <div className="main-container">
                 <NavigationBar language={this.state.language} changeLanguage={this.changeLanguage} signedIn={this.state.signedIn} signUserOut={this.signUserOut} onHowToUseClick={this.onHowToUseClick} onMyRequestsClick={this.onMyRequestsClick} changeIsChecking={this.changeIsChecking} />
                 {this.state.isChecking ? <Loading /> : null}
                 {
-                    !this.state.signedIn ? <LoggedOut serverAddress={this.props.serverAddress} signUserIn={this.signUserIn} changeIsChecking={this.changeIsChecking} language={this.state.language} /> :
-                        <LoggedIn serverAddress={this.props.serverAddress} signUserOut={this.signUserOut} user={this.state.user} changeIsChecking={this.changeIsChecking} language={this.state.language} />
+                    this.getMainFrame()
                 }
                 {
                     this.getModal()
