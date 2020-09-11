@@ -16,7 +16,7 @@ app.all(/.*/, (req, res, next) => {
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.get("/", (req, res) => {
+app.get(["/","/reset_password"], (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "build", "index.html"));
 });
 
