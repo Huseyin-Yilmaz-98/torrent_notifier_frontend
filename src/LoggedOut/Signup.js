@@ -51,7 +51,7 @@ export default class Signup extends Component {
         }
 
         const email_split = email.split("@");
-        if (email_split.length !== 2 || email_split[0].length === 0 || email_split.split(".").length !== 2) { //check if email contains @ and .
+        if (email_split.length !== 2 || email_split[0].length === 0 || email_split[1].split(".").length !== 2) { //check if email contains @ and .
             this.setState({ warning: texts.email_wrong_pattern_warning[this.props.language] });
             return;
         }
