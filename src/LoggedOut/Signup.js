@@ -89,6 +89,13 @@ export default class Signup extends Component {
         this.setState({ nameText: event.target.value });
     }
 
+    //if enter is pressed, try to sign up
+    onKeyDown = (event)=>{
+        if(event.keyCode===13){
+            this.onSubmitSignup();
+        }
+    }
+
     render() {
         return (
             <div className="form-outer">
@@ -99,15 +106,15 @@ export default class Signup extends Component {
                     </div>
                     <div>
                         <div className="form-element-label">{texts.name_text[this.props.language]}</div>
-                        <input type="text" name="name" className="form-input-field" onChange={this.onNameChange} />
+                        <input type="text" name="name" className="form-input-field" onChange={this.onNameChange} onKeyDown={this.onKeyDown}/>
                     </div>
                     <div>
                         <div className="form-element-label">{texts.email_text[this.props.language]}</div>
-                        <input type="email" name="email" className="form-input-field" onChange={this.onEmailChange} />
+                        <input type="email" name="email" className="form-input-field" onChange={this.onEmailChange} onKeyDown={this.onKeyDown}/>
                     </div>
                     <div>
                         <div className="form-element-label">{texts.password_text[this.props.language]}</div>
-                        <input type="password" name="password" className="form-input-field" onChange={this.onPasswordChange} />
+                        <input type="password" name="password" className="form-input-field" onChange={this.onPasswordChange} onKeyDown={this.onKeyDown}/>
                     </div>
                     <input type="submit" className="form-submit" value={texts.sign_up_text[this.props.language]} onClick={this.onSubmitSignup} />
                     <p className="form-direct" onClick={() => this.props.changeRoute("sign_in")}>{texts.sign_in_text[this.props.language]}</p>

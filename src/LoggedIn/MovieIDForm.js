@@ -2,12 +2,19 @@ import React from 'react';
 import texts from "../texts";
 
 class MovieIDForm extends React.Component {
+    //if enter is pressed, submit
+    onKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            this.props.getMovieInformation(false);
+        }
+    }
+
     render() {
         return (
             <div className="center-box">
                 <div className="linkform-container">
                     <div className="linkform-upper">
-                        <input type="text" className="link-input" onChange={this.props.onLinkInputChange} onPaste={this.props.onLinkPaste}></input>
+                        <input type="text" className="link-input" onChange={this.props.onLinkInputChange} onPaste={this.props.onLinkPaste} onKeyDown={this.onKeyDown}></input>
                         <button className="send-link f6 link dim ph3 pv2 dib dark-blue b bg-white" onClick={() => { this.props.getMovieInformation(false) }}>{texts.detect_text[this.props.language]}</button>
                     </div>
                     {this.props.showSuggestions ? <table className="suggestions-box">

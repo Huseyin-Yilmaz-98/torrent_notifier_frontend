@@ -40,6 +40,13 @@ export default class ForgotPassword extends Component {
         this.setState({ emailText: event.target.value });
     }
 
+    //if enter is pressed, try to submit
+    onKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            this.onSubmitResetPassword();
+        }
+    }
+
     render() {
         return (
             <div className="form-outer">
@@ -50,7 +57,7 @@ export default class ForgotPassword extends Component {
                     </div>
                     <div>
                         <div className="form-element-label">{texts.email_text[this.props.language]}</div>
-                        <input type="email" name="email" className="form-input-field" disabled={this.state.isSent} onChange={this.onEmailChange} />
+                        <input type="email" name="email" className="form-input-field" disabled={this.state.isSent} onChange={this.onEmailChange} onKeyDown={this.onKeyDown} />
                     </div>
                     <input type="submit" className="form-submit forgot-password-submit" disabled={this.state.isSent} value={texts.reset_password_text[this.props.language]} onClick={this.onSubmitResetPassword} />
                     <p className="form-direct" onClick={() => this.props.changeRoute("sign_in")}>{texts.sign_in_text[this.props.language]}</p>
