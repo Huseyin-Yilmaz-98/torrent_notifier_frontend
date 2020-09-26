@@ -28,7 +28,7 @@ const Versions = (props) => {
                     {[1, 2, 3, 4].map(i => <div className="release empty" key={i} />) /*added 4 empty divs so that the items in the last row wont go out of line*/}
                 </div>
             </div>
-            <div>
+            <div className="formats-additional-container">
                 <p className="select-all" onClick={selectAll}>{texts.select_all_text[language]}</p>
                 <p className="select-all deselect" onClick={deselectAll}>{texts.deselect_all_text[language]}</p>
             </div>
