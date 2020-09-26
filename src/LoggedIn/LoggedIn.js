@@ -197,10 +197,19 @@ class LoggedIn extends Component {
     //when a change in the release type boxes is detected, update the selectedFormats list
     onFormatChange = (vid, category, level) => {
         if (this.state.selectedFormats.indexOf(vid) === -1) {
-            this.state.selectedFormats.push(vid); //if the release type is not in the list, add it to the list
+            if (category < 0) {
+                this.state.formats.filter(format => category <= format.category).forEach(format => this.selectFormat(format.vid));
+            }
         }
         else {
             this.state.selectedFormats.splice(this.state.selectedFormats.indexOf(vid), 1); //if the release type is in the list, remove it
+        }
+    }
+
+    deselectFormat = (vid) => {
+        if (this.state.selectedFormats.indexOf(vid) !== -1) {
+            this.state.selectedFormats.splice(this.state.selectedFormats.indexOf(vid), 1);
+            document.getElementById(vid).checked = false;
         }
     }
 
