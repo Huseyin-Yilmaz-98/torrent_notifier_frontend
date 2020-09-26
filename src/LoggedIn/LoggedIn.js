@@ -114,8 +114,8 @@ class LoggedIn extends Component {
     /*sends the imdb id and the selected formats to server,
     asks the server to add the request to database */
     addRequest = () => {
-        if(this.state.selectedFormats.length===0){
-            this.setState({warning:texts.no_formats_selected_warning[this.props.language]});
+        if (this.state.selectedFormats.length === 0) {
+            this.setState({ warning: texts.no_formats_selected_warning[this.props.language] });
             return;
         }
         this.props.changeIsChecking(true); //show loading bar
@@ -195,7 +195,7 @@ class LoggedIn extends Component {
     }
 
     //when a change in the release type boxes is detected, update the selectedFormats list
-    onFormatChange = (vid) => {
+    onFormatChange = (vid, category, level) => {
         if (this.state.selectedFormats.indexOf(vid) === -1) {
             this.state.selectedFormats.push(vid); //if the release type is not in the list, add it to the list
         }
@@ -208,6 +208,7 @@ class LoggedIn extends Component {
     selectFormat = (vid) => {
         if (this.state.selectedFormats.indexOf(vid) === -1) {
             this.state.selectedFormats.push(vid);
+            document.getElementById(vid).checked = true;
         }
     }
 

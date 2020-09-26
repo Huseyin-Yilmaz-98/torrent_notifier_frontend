@@ -5,11 +5,7 @@ const Versions = (props) => {
     const { formats, onFormatChange, selectFormat, language, warningLength, addRequest } = props;
 
     const selectAll = () => { //function to select all release formats
-        const checkBoxes = document.getElementsByClassName("release-box");
-        for (let i = 0; i < checkBoxes.length; i++) {
-            checkBoxes[i].checked = true;
-            selectFormat(formats[i].vid);
-        }
+        formats.forEach(format => selectFormat(format.vid))
     }
 
     return (
@@ -20,7 +16,7 @@ const Versions = (props) => {
                     {formats.map(format => {
                         return (
                             <div className="release" key={format.vid}>
-                                <input type="checkbox" className="release-box" onChange={() => onFormatChange(format.vid)} />
+                                <input type="checkbox" className="release-box" id={format.vid} onChange={() => onFormatChange(format.vid, format.category, format.level)} />
                                 {"\u00a0"} {language === "en" ? format.name_en : format.name_tr}
                             </div>
                         )
