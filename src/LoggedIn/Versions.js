@@ -2,10 +2,14 @@ import React from "react";
 import texts from "../texts";
 
 const Versions = (props) => {
-    const { formats, onFormatChange, selectFormat, language, warningLength, addRequest } = props;
+    const { formats, onFormatChange, selectFormat, deselectFormat, language, warningLength, addRequest } = props;
 
     const selectAll = () => { //function to select all release formats
         formats.forEach(format => selectFormat(format.vid))
+    }
+
+    const deselectAll = () => { //function to deselect all release formats
+        formats.forEach(format => deselectFormat(format.vid))
     }
 
     return (
@@ -25,6 +29,7 @@ const Versions = (props) => {
                 </div>
             </div>
             <p className="select-all" onClick={selectAll}>{texts.select_all_text[language]}</p>
+            <p className="select-all deselect" onClick={deselectAll}>{texts.deselect_all_text[language]}</p>
             <button className={"send-formats f6 link dim ph3 pv2 dib dark-blue b bg-white" + (warningLength ? "" : " withMargin")} onClick={addRequest}>{texts.send_text[language]}</button>
         </div>
     )

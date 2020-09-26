@@ -197,20 +197,32 @@ class LoggedIn extends Component {
     //when a change in the release type boxes is detected, update the selectedFormats list
     onFormatChange = (vid, category, level) => {
         if (this.state.selectedFormats.indexOf(vid) === -1) {
+            //if category number is below zero, select all formats with a higher category number than this
             if (category < 0) {
                 this.state.formats.filter(format => category <= format.category)
                     .forEach(format => this.selectFormat(format.vid));
             }
+            //if category number is higher than zero, select all formats with this category number and with a higher level number
             else {
                 this.state.formats.filter(format => category === format.category && level <= format.level)
                     .forEach(format => this.selectFormat(format.vid));
             }
         }
         else {
-            this.state.selectedFormats.splice(this.state.selectedFormats.indexOf(vid), 1); //if the release type is in the list, remove it
+            //if category number is below zero, deselect all formats with a lower category number
+            if (category < 0) {
+                this.state.formats.filter(format => category >= format.category)
+                    .forEach(format => this.deselectFormat(format.vid));
+            }
+            //if category number is higher than zero, deselect all formats with the same category number and with a lower level number or whose category number is below zero
+            else {
+                this.state.formats.filter(format => (category === format.category && level >= format.level) || format.category < 0)
+                    .forEach(format => this.selectFormat(format.vid));
+            }
         }
     }
 
+    //remove format type from the list
     deselectFormat = (vid) => {
         if (this.state.selectedFormats.indexOf(vid) !== -1) {
             this.state.selectedFormats.splice(this.state.selectedFormats.indexOf(vid), 1);
@@ -248,7 +260,7 @@ class LoggedIn extends Component {
                                     ? <SeasonEpisode language={this.props.language} episode={this.state.episode} season={this.state.season} onSeasonChange={this.onSeasonChange} onEpisodeChange={this.onEpisodeChange} />
                                     : null
                             }
-                            <Versions selectFormat={this.selectFormat} formats={this.state.formats} onFormatChange={this.onFormatChange} language={this.props.language} addRequest={this.addRequest} warningLength={this.state.warning.length} />
+                            <Versions selectFormat={this.selectFormat} deselectFormat={this.deselectFormat} formats={this.state.formats} onFormatChange={this.onFormatChange} language={this.props.language} addRequest={this.addRequest} warningLength={this.state.warning.length} />
                         </div>
                         : null
                 }

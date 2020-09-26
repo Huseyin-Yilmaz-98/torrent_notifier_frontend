@@ -167,6 +167,10 @@ const texts = {
         en: "Select All",
         tr: "Tümünü Seç"
     },
+    deselect_all_text: {
+        en: "Deselect All",
+        tr: "Tümünü Kaldır"
+    },
     delete_confirm_text: {
         en: "Are you sure you no longer want to be notified about this movie: ",
         tr: "Bu filmle ilgili bildirim almak istemediğinize emin misiniz: "
