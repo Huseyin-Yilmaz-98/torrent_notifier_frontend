@@ -28,8 +28,11 @@ const Versions = (props) => {
                     {[1, 2, 3, 4].map(i => <div className="release empty" key={i} />) /*added 4 empty divs so that the items in the last row wont go out of line*/}
                 </div>
             </div>
-            <p className="select-all" onClick={selectAll}>{texts.select_all_text[language]}</p>
-            <p className="select-all deselect" onClick={deselectAll}>{texts.deselect_all_text[language]}</p>
+            <div>
+                <p className="select-all" onClick={selectAll}>{texts.select_all_text[language]}</p>
+                <p className="select-all deselect" onClick={deselectAll}>{texts.deselect_all_text[language]}</p>
+            </div>
+
             <button className={"send-formats f6 link dim ph3 pv2 dib dark-blue b bg-white" + (warningLength ? "" : " withMargin")} onClick={addRequest}>{texts.send_text[language]}</button>
         </div>
     )

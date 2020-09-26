@@ -217,7 +217,7 @@ class LoggedIn extends Component {
             //if category number is higher than zero, deselect all formats with the same category number and with a lower level number or whose category number is below zero
             else {
                 this.state.formats.filter(format => (category === format.category && level >= format.level) || format.category < 0)
-                    .forEach(format => this.selectFormat(format.vid));
+                    .forEach(format => this.deselectFormat(format.vid));
             }
         }
     }
