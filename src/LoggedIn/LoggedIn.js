@@ -198,7 +198,12 @@ class LoggedIn extends Component {
     onFormatChange = (vid, category, level) => {
         if (this.state.selectedFormats.indexOf(vid) === -1) {
             if (category < 0) {
-                this.state.formats.filter(format => category <= format.category).forEach(format => this.selectFormat(format.vid));
+                this.state.formats.filter(format => category <= format.category)
+                    .forEach(format => this.selectFormat(format.vid));
+            }
+            else {
+                this.state.formats.filter(format => category === format.category && level <= format.level)
+                    .forEach(format => this.selectFormat(format.vid));
             }
         }
         else {
