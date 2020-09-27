@@ -20,12 +20,14 @@ const Versions = (props) => {
                     {formats.map(format => {
                         return (
                             <div className="release" key={format.vid}>
-                                <input type="checkbox" className="release-box" id={format.vid} onChange={() => onFormatChange(format.vid, format.category, format.level)} />
+                                <input type="checkbox" className="release-box" id={format.vid}
+                                    onChange={() => onFormatChange(format.vid, format.category, format.level)} />
                                 {"\u00a0"} {language === "en" ? format.name_en : format.name_tr}
                             </div>
                         )
                     })}
-                    {[1, 2, 3, 4].map(i => <div className="release empty" key={i} />) /*added 4 empty divs so that the items in the last row wont go out of line*/}
+                    {/*added 4 empty divs so that the items in the last row wont go out of line*/
+                        [1, 2, 3, 4].map(i => <div className="release empty" key={i} />)}
                 </div>
             </div>
             <div className="formats-additional-container">
@@ -33,7 +35,8 @@ const Versions = (props) => {
                 <p className="select-all deselect" onClick={deselectAll}>{texts.deselect_all_text[language]}</p>
             </div>
 
-            <button className={"send-formats f6 link dim ph3 pv2 dib dark-blue b bg-white" + (warningLength ? "" : " withMargin")} onClick={addRequest}>{texts.send_text[language]}</button>
+            <button className={"send-formats f6 link dim ph3 pv2 dib dark-blue b bg-white" + (warningLength ? "" : " withMargin")}
+                onClick={addRequest}>{texts.send_text[language]}</button>
         </div>
     )
 }
