@@ -4,7 +4,7 @@ Tracker app for the website can be found [here](https://github.com/Xeraphin/torr
 
 -----------------
 
-This app was written in React.js. In order for the app to work, private.key, certificate.crt and ca_bundle.crt must be present in the root directory. These files are required because the app uses HTTPS protocol.
+This app was written in React.js. In order for the app to work, private.key, certificate.crt and ca_bundle.crt files must be present in the root directory. These files are required because the app uses HTTPS protocol.
 
 There is one more file that is not included here. It is the info.json file in the src folder. This file contains the backend address for the app, and all fetch requests are made to that address. The structure for the info.json file is as follows:
 
