@@ -14,4 +14,4 @@ There is one more file that is not included here. It is the info.json file in th
 
 The app is served using Express in the main.js file. A production build can be built with the command "npm run build" and then the main.js file can be run with the command "(sudo) node main.js".
 
-Since the app uses HTTPS protocols, all requests made to http addresses are redirected to https addresses. Also, if "www" is not included in the url, the request is redirected to the same url with "www".
+Since the app uses HTTPS protocol, all requests made to http addresses are redirected to https addresses. Also, if "www" is not included in the url, the request is redirected to the same url with "www".
