@@ -150,6 +150,7 @@ class Home extends React.Component {
             return null;
         }
     }
+    
     render() {
         return (
             <div className="main-container">

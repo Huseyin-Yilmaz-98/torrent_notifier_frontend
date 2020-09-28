@@ -38,17 +38,15 @@ export default class Signin extends Component {
             .then(data => {
                 if (data.success) {
                     this.props.signUserIn(data.user);
-                    this.props.changeIsChecking(false);
                 }
                 else {
                     this.setState({ warning: this.getWarningText(data.status) });
-                    this.props.changeIsChecking(false);
                 }
             })
             .catch(() => {
                 this.setState({ warning: texts.cant_connect_to_server_warning[this.props.language] });
-                this.props.changeIsChecking(false);
-            });
+            })
+            .finally(()=>this.props.changeIsChecking(false))
     }
 
     //watches the changes on the email field

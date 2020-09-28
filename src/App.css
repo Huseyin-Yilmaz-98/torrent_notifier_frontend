@@ -102,3 +102,19 @@ input:disabled, input:disabled:hover{
   background-color: gray;
   opacity: 1;
 }
+
+.email-options{
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  width:50%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: space-around;
+  margin-top:10px;
+}
+
+input[name=email-lang]{
+  margin-right:3px;
+  margin-left:3px;
+}

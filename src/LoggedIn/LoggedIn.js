@@ -103,12 +103,12 @@ class LoggedIn extends Component {
                         });
                     }
                 }
-                this.props.changeIsChecking(false); //hide the loading bar
             })
             .catch(() => {
                 this.setState({ warning: texts.cant_connect_to_server_warning[this.props.language] });
-                this.props.changeIsChecking(false); //hide the loading bar
             })
+            //hide the loading bar
+            .finally(() => this.props.changeIsChecking(false))
     }
 
     /*sends the imdb id and the selected formats to server,
@@ -145,13 +145,12 @@ class LoggedIn extends Component {
                         })
                     }
                 }
-                this.props.changeIsChecking(false);
                 window.scrollTo(0, document.body.scrollHeight); //scroll to the bottom of the page
             })
             .catch(() => {
                 this.setState({ warning: texts.cant_connect_to_server_warning[this.props.language] });
-                this.props.changeIsChecking(false);
             })
+            .finally(()=>this.props.changeIsChecking(false));
     }
 
     //sends the text in the search bar to the server and requests the suggestions from imdb database
@@ -179,7 +178,7 @@ class LoggedIn extends Component {
             .catch(() => {
                 this.setState({ isSearching: false, lastSearched: text, showSuggestions: true, suggestions: [] });
             })
-            .then(() => this.getSuggestions()) //call the function again in case there is a change in the input, if there is no change, nothing will be done
+            .finally(() => this.getSuggestions()) //call the function again in case there is a change in the input, if there is no change, nothing will be done
     }
 
     //when there is change in the search bar, update the linkInput and call the getSuggestions function

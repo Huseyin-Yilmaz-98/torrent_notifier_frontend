@@ -5,12 +5,7 @@ import icon from "./delete.png";
 const MyRequests = (props) => {
     const [selected, setSelected] = useState([null, null, null]);
     const getNumberString = (number) => {
-        if (number >= 10) {
-            return "" + number;
-        }
-        else {
-            return "0" + number;
-        }
+        return number >= 10 ? "" + number : "0" + number
     }
 
     const editName = (name, season, episode) => {

@@ -9,7 +9,8 @@ export default class Signup extends Component {
             emailText: '',
             passwordText: '',
             nameText: '',
-            warning: ''
+            warning: '',
+            email_language: 'en'
         }
     }
 
@@ -58,7 +59,7 @@ export default class Signup extends Component {
 
         this.props.changeIsChecking(true);
         this.setState({ warning: "" });
-        fetch_post_json(this.props.serverAddress + "register", { email: email, password: this.state.passwordText, name: this.state.nameText })
+        fetch_post_json(this.props.serverAddress + "register", { email: email, password: this.state.passwordText, name: this.state.nameText, lang: this.state.email_language })
             .then(data => {
                 if (data.success) {
                     this.props.signUserIn(data.user);
@@ -66,12 +67,11 @@ export default class Signup extends Component {
                 else {
                     this.setState({ warning: this.getWarningText(data.status) })
                 }
-                this.props.changeIsChecking(false);
             })
             .catch(() => {
                 this.setState({ warning: texts.cant_connect_to_server_warning[this.props.language] });
-                this.props.changeIsChecking(false);
             })
+            .finally(() => this.props.changeIsChecking(false))
     }
 
     //watches for changes in the email field
@@ -90,13 +90,18 @@ export default class Signup extends Component {
     }
 
     //if enter is pressed, try to sign up
-    onKeyDown = (event)=>{
-        if(event.keyCode===13){
+    onKeyDown = (event) => {
+        if (event.keyCode === 13) {
             this.onSubmitSignup();
         }
     }
 
+    onChangeEmailLanguage = (event) => {
+        this.setState({ email_language: event.target.value })
+    }
+
     render() {
+        console.log(this.state.email_language)
         return (
             <div className="form-outer">
                 <div className="form-container">
@@ -106,15 +111,28 @@ export default class Signup extends Component {
                     </div>
                     <div>
                         <div className="form-element-label">{texts.name_text[this.props.language]}</div>
-                        <input type="text" name="name" className="form-input-field" onChange={this.onNameChange} onKeyDown={this.onKeyDown}/>
+                        <input type="text" name="name" className="form-input-field" onChange={this.onNameChange} onKeyDown={this.onKeyDown} />
                     </div>
                     <div>
                         <div className="form-element-label">{texts.email_text[this.props.language]}</div>
-                        <input type="email" name="email" className="form-input-field" onChange={this.onEmailChange} onKeyDown={this.onKeyDown}/>
+                        <input type="email" name="email" className="form-input-field" onChange={this.onEmailChange} onKeyDown={this.onKeyDown} />
                     </div>
                     <div>
                         <div className="form-element-label">{texts.password_text[this.props.language]}</div>
-                        <input type="password" name="password" className="form-input-field" onChange={this.onPasswordChange} onKeyDown={this.onKeyDown}/>
+                        <input type="password" name="password" className="form-input-field" onChange={this.onPasswordChange} onKeyDown={this.onKeyDown} />
+                    </div>
+                    <div>
+                        <div className="form-element-label">{texts.email_language_text[this.props.language]}</div>
+                        <div className="email-options">
+                            <div>
+                                <input type="radio" name="email-lang" id="en" value="en" defaultChecked={true} onChange={this.onChangeEmailLanguage}></input>
+                                <label for="en">English</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="email-lang" id="tr" value="tr" onChange={this.onChangeEmailLanguage}></input>
+                                <label for="tr">Turkish</label>
+                            </div>
+                        </div>
                     </div>
                     <input type="submit" className="form-submit" value={texts.sign_up_text[this.props.language]} onClick={this.onSubmitSignup} />
                     <p className="form-direct" onClick={() => this.props.changeRoute("sign_in")}>{texts.sign_in_text[this.props.language]}</p>

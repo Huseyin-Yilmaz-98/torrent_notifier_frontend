@@ -190,6 +190,10 @@ const texts = {
     year_unknown: {
         en: "Unknown",
         tr: "Bilinmiyor"
+    },
+    email_language_text:{
+        en: "Email Language",
+        tr: "Eposta Dili"
     }
 }
 

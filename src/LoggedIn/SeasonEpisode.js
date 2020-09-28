@@ -8,6 +8,7 @@ const SeasonEpisode = (props) => {
         seasonOptions.push(<option value={i} key={i}>{i}</option>)
         episodeOptions.push(<option value={i} key={i}>{i}</option>)
     }
+    
     return (
         <div className="outer">
             <div className="season-episode-container">
